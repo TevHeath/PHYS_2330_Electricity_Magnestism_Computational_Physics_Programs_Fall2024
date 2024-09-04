@@ -47,7 +47,7 @@ Each of these programs and code can be accessed in their own folder, with corres
 EM Personal project is something that is not contained within the course, but this is the development of a personal projects as a Computer Engineering Student at the University of Guelph. I aimed at applying the field of computational physics with Electrical circuits and physics. I designed my own projects and applied these topics in areas that could serve to be useful int he future for potential employers and researchers.
 
 
-### cpresources
+### PHYS 2330: Resources
 This folder contains resources and datasets provided that I was able to find and utilize throughout the course
 
 ## Acknowledgments
