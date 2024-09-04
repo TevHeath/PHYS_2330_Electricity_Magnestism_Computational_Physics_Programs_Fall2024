@@ -1,4 +1,4 @@
-# PHYS 2330: Computational Electricity & Magnestism Programs 
+# PHYS 2330: Computational Electricity & Magnetism Programs 
 
 
 ##### 09/01/204 Note: This project was designed to create a more hands-ion approach in understanding Physics from a computational and scientific method. Additionally, I wanted to keep a track of all the coding that I did for the Fall 2024. I  started while I am currently a Computer Engineering Student minoring in Physic at the University of Guelph. This is a personal projects for me to develop my coding, programming and scientific computational skills as an undergraduate student. I believe that programming beyond solely the area of computer engineering and within different fields such as physics and numerical computational are an important part of my portfolio to showcase my computer engineering, computational physics, mathematical modeling, and python programming skills.
@@ -37,13 +37,13 @@ The original questions can be found within the respository called the FYTT, thes
 Each of these programs and code can be accessed in their own folder, with corresponding documentation as needed or required within the project or computational ask from the instrcutors.
 
 
-### Electricity & Magnestism Project #1: Due Date - September 19, 2024
+### Electricity & Magnetism Project #1: Due Date - September 19, 2024
 
-### Electricity & Magnestism Project #2: Due Date - October 17, 2024
+### Electricity & Magnetism Project #2: Due Date - October 17, 2024
 
-### Electricity & Magnestism Project #3: Due Date - November 14, 2024
+### Electricity & Magnetism Project #3: Due Date - November 14, 2024
 
-### Electricity & Magnestism Personal Project: Due Date - September 5 to November 29, 2024
+### Electricity & Magnetism Personal Project: Due Date - September 5 to November 29, 2024
 EM Personal project is something that is not contained within the course, but this is the development of a personal projects as a Computer Engineering Student at the University of Guelph. I aimed at applying the field of computational physics with Electrical circuits and physics. I designed my own projects and applied these topics in areas that could serve to be useful int he future for potential employers and researchers.
 
 
