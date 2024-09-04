@@ -1,4 +1,4 @@
-# PHYS_2330: Computational Electricity & Magnestism Programs 
+# PHYS 2330: Computational Electricity & Magnestism Programs 
 
 
 ##### 09/01/204 Note: This project was designed to create a more hands-ion approach in understanding Physics from a computational and scientific method. Additionally, I wanted to keep a track of all the coding that I did for the Fall 2024. I  started while I am currently a Computer Engineering Student minoring in Physic at the University of Guelph. This is a personal projects for me to develop my coding, programming and scientific computational skills as an undergraduate student. I believe that programming beyond solely the area of computer engineering and within different fields such as physics and numerical computational are an important part of my portfolio to showcase my computer engineering, computational physics, mathematical modeling, and python programming skills.
