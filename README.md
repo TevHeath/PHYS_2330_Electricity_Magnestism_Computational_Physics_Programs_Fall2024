@@ -8,7 +8,7 @@
 - If you are looking to contact me for consulting, coffee, or internships prospects visit my website to contact me [here]
 
 
-# Differential Equations Computational Solutions
+# Computational Physics Solutions
 -  **Instructor:** Drs. Mike Mossa & Joanne  O'Meara (Fall 2024)
 -  **Solutions/Scripts:** Tevin Heath (Computer Engineering Student c.2027 w/ Minor Physics)
 
