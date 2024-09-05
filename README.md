@@ -43,7 +43,7 @@ Each of these programs and code can be accessed in their own folder, with corres
 ### Electricity & Magnetism Computational Project #1/Assignment #2: Due Date - September 27, 2024
 
 ### Electricity & Magnetism Study Guide/Final Assessment Installment Part #1: Due Date - October 11, 2024
-Coulomb’s law, work & potential energy, electric fields of point charges and charge
+- Coulomb’s law, work & potential energy, electric fields of point charges and charge
 distributions (Lectures 1 to 9).
 
 ### Electricity & Magnetism Physics Assignment #3: Due Date - October 18, 2024
@@ -58,7 +58,7 @@ Electric potential, dipoles, flux, Gauss’s Law (Lectures 10 to 17).
 ### Electricity & Magnetism Computational Project #3/Assignment #7: Due Date - November 27, 2024
 
 ### Electricity & Magnetism Study Guide/Final Assessment Installment Part #3: Due Date - Decmember 9th, 2024
-Gradients, divergence, curl of vector fields in general as well as with respect to
+- Gradients, divergence, curl of vector fields in general as well as with respect to
 electrostatics, Poisson’s Equation, Laplace Equation, Electric field in matter (Lectures 18
 to 24).
 
