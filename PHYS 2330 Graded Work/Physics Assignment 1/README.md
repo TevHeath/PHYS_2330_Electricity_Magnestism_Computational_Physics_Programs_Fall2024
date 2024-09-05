@@ -1,1 +1,1 @@
-# PHYSICS Assginment #1
+# PHYSICS Assignment #1
