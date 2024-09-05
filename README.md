@@ -50,10 +50,7 @@ distributions (Lectures 1 to 9).
 
 ### Electricity & Magnetism Computational Project #2/Assignment #4: Due Date - October 25, 2024
 
-### Electricity & Magnetism Physics Assignment #4: Due Date - October 25, 2024
-
 ### Electricity & Magnetism Physics Assignment #5: Due Date - November 1, 2024
-
 
 ### Electricity & Magnetism Study Guide/Final Assessment Installment Part #2: Due Date - November 15, 2024
 Electric potential, dipoles, flux, Gauss’s Law (Lectures 10 to 17).
