@@ -1,12 +1,4 @@
-# PHYS 2330: Computational Electricity & Magnetism Programs 
-
-
-##### 09/01/204 Note: This project was designed to create a more hands-on approach in understanding Physics from a computational and scientific method. Additionally, I wanted to keep a track of all the coding that I did for the Fall 2024. I  started while I am currently a Computer Engineering Student minoring in Physic at the University of Guelph. This is a personal projects for me to develop my coding, programming and scientific computational skills as an undergraduate student. I believe that programming beyond solely the area of computer engineering and within different fields such as physics and numerical computational are an important part of my portfolio to showcase my computer engineering, computational physics, mathematical modeling, and python programming skills.
-
-
-- If you are looking for examples of my work with Computational Physics within the Course Physics 2330 check out my repo [here]
-- If you are looking to contact me for consulting, coffee, or internships prospects visit my website to contact me [here]
-
+# Graded Work
 
 # Computational Physics Solutions
 -  **Instructor:** Drs. Mike Mossa & Joanne  O'Meara (Fall 2024)
@@ -31,7 +23,7 @@ With my solutions I strive to supply an example of my ability in the following a
 
 The original questions can be found within the respository called the FYTT, these exercise are standard question that range from easy to advanced. Although depending one the question they might not require a computational solution.
 
-## General Synopsis
+## Schedule & Due Dates
 
 
 Each of these programs and code can be accessed in their own folder, with corresponding documentation as needed or required within the project or computational ask from the instrcutors.
