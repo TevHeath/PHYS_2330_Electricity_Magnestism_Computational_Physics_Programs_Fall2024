@@ -57,7 +57,7 @@ distributions (Lectures 1 to 9).
 
 ### Electricity & Magnetism Computational Project & Assignment #7: Due Date - November 27, 2024
 
-### Electricity & Magnetism Study Guide/Final Assessment Installment Part #3: Due Date - DDecember 9th, 2024
+### Electricity & Magnetism Study Guide/Final Assessment Installment Part #3: Due Date - December 9th, 2024
 - Gradients, divergence, curl of vector fields in general as well as with respect to
 electrostatics, Poisson’s Equation, Laplace Equation, Electric field in matter (Lectures 18
 to 24).
