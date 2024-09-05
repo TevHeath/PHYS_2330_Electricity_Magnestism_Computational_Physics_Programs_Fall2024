@@ -57,12 +57,12 @@ distributions (Lectures 1 to 9).
 
 ### Electricity & Magnetism Computational Project & Assignment #7: Due Date - November 27, 2024
 
-### Electricity & Magnetism Study Guide/Final Assessment Installment Part #3: Due Date - Decemeber 9th, 2024
+### Electricity & Magnetism Study Guide/Final Assessment Installment Part #3: Due Date - DDecember 9th, 2024
 - Gradients, divergence, curl of vector fields in general as well as with respect to
 electrostatics, Poisson’s Equation, Laplace Equation, Electric field in matter (Lectures 18
 to 24).
 
-### Electricity & Magnetism Personal Project: Due Date - September 5 to Decemeber 9, 2024
+### Electricity & Magnetism Personal Project: Due Date - September 5 to December 9, 2024
 EM Personal project is something that is not contained within the course, but this is the development of a personal projects as a Computer Engineering Student at the University of Guelph. I aimed at applying the field of computational physics with Electrical circuits and physics. I designed my own projects and applied these topics in areas that could serve to be useful int he future for potential employers and researchers.
 
 
