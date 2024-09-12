@@ -1,4 +1,4 @@
-# Computational Exercise 1 for PHYS*2330 - Fall 2023
+# Computational Exercise 1 for PHYS*2330 - Fall 2024
 # dipolePlot.py - scaffold code
 # MVM
 #------------------------------------------------------------------------------
@@ -8,7 +8,6 @@
 #---------------------------------------------------------------------------"""
 import numpy as np
 import matplotlib.pyplot as plt
-
 
 """ Section 2:  Define functions for the script
 #---------------------------------------------------------------------------"""
