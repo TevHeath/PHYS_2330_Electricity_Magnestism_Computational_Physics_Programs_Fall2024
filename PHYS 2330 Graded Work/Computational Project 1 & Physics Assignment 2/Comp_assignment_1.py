@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 def potential(q, rq, x, y):
     k = 8.99e9
 
-    r = np.sqrt((rq[0] - x**2) + (rq[1] - y)**2)
+    r = np.sqrt((rq[0] - x)**2 + (rq[1] - y)**2)
 
     V = k*q/r
 
