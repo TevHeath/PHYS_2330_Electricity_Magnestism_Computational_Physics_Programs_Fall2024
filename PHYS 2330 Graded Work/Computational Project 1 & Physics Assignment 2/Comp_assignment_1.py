@@ -73,17 +73,22 @@ ax2 = fig.add_subplot(122)
 ax1.set_title("X meshgrid", fontsize=20)
 ax2.set_title("Y meshgrid", fontsize=20)
 
-im1 = ax1.imshow(X, cmap='inferno')
-im2 = ax2.imshow(Y, cmap='inferno')
+im1 = ax1.imshow(Vfunzies,
+                 cmap ='inferno',
+                 extent = (-5, 5, -5, 5),
+                 origin = 'lower')
+im2 = ax2.imshow(Y,
+                 cmap ='inferno',)
 plt.colorbar(im2)
+
 
 # Contour plots set equipotential lines that are equally spaced in values of V
 # We can specify the values of the contour lines
 
-#VpLines = 10**np.linspace(8,12,5)
-#VpLines = sorted(list(-VpLines) + list(VpLines))
+VpLines = 10**np.linspace(8,12,5)
+VpLines = sorted(list(-VpLines) + list(VpLines))
 
-#ax1.contour(X, Y, V, colors='k', linewidths=1)
+ax1.contour(X, Y, Vfunzies, colors='k', linewidths=1, levels=VpLines)
 
 
 # Save your plot
