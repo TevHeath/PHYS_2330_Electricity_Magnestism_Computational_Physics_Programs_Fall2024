@@ -7,6 +7,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 """ Section 2:  Define functions for the script
 #---------------------------------------------------------------------------"""
 
