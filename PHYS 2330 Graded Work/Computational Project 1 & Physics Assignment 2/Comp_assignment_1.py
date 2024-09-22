@@ -34,7 +34,20 @@ X, Y = np.meshgrid(x, y)
 
 # Define the charges (charge & position) that make up the electric dipole
 
-V = 1/(1 + X**2 + (Y-1)**2) #Lorzen
+V = 1/(1 + X**2 + (Y-1)**2) #Lorzentzian
+
+q1 = 1.0
+x1 = 1.0
+y1 = 1.0
+
+q2 = -1.0
+x2 = -1.0
+y2= 0.0
+
+Vfunzies = potential(q1, [x1,y1], X, Y)
+Vfunzies += potential(q2, [x2, y2], X, Y)
+
+print(Vfunzies)
 
 
 # For each gridpoint in X, Y, we will need to calculate the electric potential
