@@ -73,7 +73,7 @@ ax2 = fig.add_subplot(122)
 ax1.set_title("X meshgrid", fontsize=20)
 ax2.set_title("Y meshgrid", fontsize=20)
 
-im1 = ax1.imshow(Vfunzies, cmap='inferno', extent=(-5, 5, -5, 5), origin="lower")
+im1 = ax1.imshow(Vfunzies, cmap='coolwarm', extent=(-5, 5, -5, 5), origin="lower")
 im2 = ax2.imshow(Y, cmap='inferno')
 plt.colorbar(im2)
 

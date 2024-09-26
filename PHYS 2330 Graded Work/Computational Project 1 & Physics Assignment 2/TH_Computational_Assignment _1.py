@@ -119,8 +119,8 @@ ax2 = fig.add_subplot(122)
 ax1.set_title("X meshgrid", fontsize = 20) #Adds title to the X axis
 ax2.set_title("Y meshgrid", fontsize = 20) #Adds title to the Y axis
 
-im1 = ax1.imshow(Vfunzies, cmap = 'inferno', extent = (-5, 5, 5, 5), origin = "lower")
-im2 = ax2.imshow(Y, cmap='inferno')
+im1 = ax1.imshow(Vfunzies, cmap = 'coolwarm', extent = (-6, 6, 6, 6), origin = "lower")
+im2 = ax2.imshow(Y, cmap='coolwarm')
 plt.colorbar(im2)
 
 # Contour plots set equipotential lines that are equally spaced in values of V
@@ -129,11 +129,13 @@ plt.colorbar(im2)
 VpLines = 10 ** np.linspace(6,12,5)
 VpLines = sorted(list(-VpLines) + list(VpLines))
 
-ax1.contour(X,Y,Vfunzies, color='k', linewidths=4, levels=VpLines)
-#Notice that the Vplines within the contours is conencted to the line 129
+ax1.contour(X,Y,Vfunzies, color='r', linewidths=1, levels=VpLines)
+#Notice that the Vplines within the contours is connected to the line 129
 #To make adjustments change within 129
 
-#
+# Save you plot
+plt.savefig('fieldPlot2.png', dpi=300)
+
 
 """ 
 PART B
