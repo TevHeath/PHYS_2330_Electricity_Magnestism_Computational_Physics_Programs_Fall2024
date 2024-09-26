@@ -14,10 +14,12 @@
 """
 PART A
 """
+from scipy.constants import epsilon_0
 
 """ Section 1:  Start by importing relevant libraries
 #---------------------------------------------------------------------------"""
 import numpy as np
+from scipy.constants import epsilon_0
 # import matplotlib.pyplot as plt
 
 """ Section 2:  Define functions for the script
@@ -27,14 +29,20 @@ import numpy as np
 # rq = (xq,yq).  Evaluate V at the given position (x,y)
 
 def e_potential(q, rq, x, y):
-    k = 8.99e9 #Colombs Constant
+    k = 8.99e9  # Colombs Constant - I could also use another
+    e_o = epsilon_0
+    Fr_pi = np.pi
+    K = 1 / ((4 * Fr_pi) * e_o)
     r = np.sqrt((rq[0] - x) ** 2 + (rq[1] - y) **2) #Distance between the position
-    V = k * q / r #Note electrical potential has been written as U also
+    V = K * q / r #Note electrical potential has been written as U also
     return V #This return allows for the output to be calculated
 
 #print(V) #I will need values to provide in order to determine the necessary values
 
 
+
+def E_field(q, rq, x,y)
+    k =
 
 """ 
 PART B
