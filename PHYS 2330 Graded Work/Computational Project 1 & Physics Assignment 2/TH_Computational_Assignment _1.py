@@ -14,7 +14,6 @@
 """
 PART A
 """
-from scipy.constants import epsilon_0
 
 """ Section 1:  Start by importing relevant libraries
 #---------------------------------------------------------------------------"""
@@ -29,10 +28,10 @@ from scipy.constants import epsilon_0
 # rq = (xq,yq).  Evaluate V at the given position (x,y)
 
 def e_potential(q, rq, x, y):
-    k = 8.99e9  # Colombs Constant - I could also use another
+    #k = 8.99e9  # Coulombs Constant - I could also use another
     e_o = epsilon_0
-    Fr_pi = np.pi
-    K = 1 / ((4 * Fr_pi) * e_o)
+    Fr_pi = (4*np.pi)
+    K = 1 / (Fr_pi * e_o)
     r = np.sqrt((rq[0] - x) ** 2 + (rq[1] - y) **2) #Distance between the position
     V = K * q / r #Note electrical potential has been written as U also
     return V #This return allows for the output to be calculated
@@ -41,8 +40,38 @@ def e_potential(q, rq, x, y):
 
 
 
-def E_field(q, rq, x,y)
-    k =
+def electric_field(q, rq, x,y):
+    e_o = epsilon_0
+    Fr_pi = (4*np.pi)
+    K = 1 / (Fr_pi * e_o)
+
+    #Calculation of the distance between charge and the observation point
+    r = np.sqrt((x - rq[0]) ** 2 + (y - rq[1]) ** 2)
+
+    #Calculation of the angle
+    theta = np.arctan(y - rq[1], x -rq[0])
+
+    #Electric field components using r-squared and theta
+    Efield_comp_x = K * q / (r ** 2) * np.cos(theta) #np.cos represents x direction
+    Efield_comp_y = K * q / (r ** 2) * np.sin(theta) #np.cos represents x direction
+
+    return Efield_comp_x, Efield_comp_y
+
+#Now that all the function are created
+#We can verify using print command and testing
+
+""" Section 3:  Main body of code
+#---------------------------------------------------------------------------"""
+# Create a 2D grid of x, y points using numpy meshgrid function
+
+nx, ny = 100, 100
+x = np.linspace(-5,5,nx)
+y = np.linspace(-5,5,ny)
+X,Y = np.meshgrid(x,y)
+
+
+
+
 
 """ 
 PART B
