@@ -27,7 +27,7 @@ from scipy.constants import epsilon_0
 # Return the electric potential, V, due to a charge "q" located at position
 # rq = (xq,yq).  Evaluate V at the given position (x,y)
 
-def e_potential(q, rq, x, y):
+def electric_potential(q, rq, x, y):
     #k = 8.99e9  # Coulombs Constant - I could also use another
     e_o = epsilon_0
     Fr_pi = (4*np.pi)
@@ -68,6 +68,48 @@ nx, ny = 100, 100
 x = np.linspace(-5,5,nx)
 y = np.linspace(-5,5,ny)
 X,Y = np.meshgrid(x,y)
+
+#Charges
+
+q1 = -3
+q2 = -1
+q3 = +2         #the plus + is not needed, but useful for clarity
+q4 = +6
+
+#Positions (after the comment)
+'''
+Note the following:
+1. Position of the charges on the vertices of a square of side length d = 3m
+2. Center the square position is at x = -1 and y =0.5
+*This is import to keep in mind especially as it relates understanding Part B
+*I will need to complete my hand calculation to determine these locations
+'''
+
+#Charge Position #1: -3
+x1 = 1/(np.sqrt(2))
+y1 = 3/(np.sqrt(2))
+
+#Charge Position #1: -1
+x2 = -1/(np.sqrt(2))
+y2 = 3/(np.sqrt(2))
+
+#Charge Position #1: +2
+x3 =-1
+y3 = 3.5
+
+#Charge Position #1: +6
+x4 = 1/(np.sqrt(2))
+y4 = 0.5 + 3
+
+Vfunzies = electric_potential(q1, [x1,y1], X,Y)
+Vfunzies += electric_potential(q2, [x2,y2], X,Y)
+Vfunzies += electric_potential(q3, [x3,y3], X,Y)
+Vfunzies += electric_potential(q4, [x4,y4], X,Y)
+
+
+
+
+
 
 
 
