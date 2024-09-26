@@ -14,12 +14,13 @@
 """
 PART A
 """
+from IPython.core.pylabtools import figsize
 
 """ Section 1:  Start by importing relevant libraries
 #---------------------------------------------------------------------------"""
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.constants import epsilon_0
-# import matplotlib.pyplot as plt
 
 """ Section 2:  Define functions for the script
 #---------------------------------------------------------------------------"""
@@ -60,7 +61,7 @@ def electric_field(q, rq, x,y):
 #Now that all the function are created
 #We can verify using print command and testing
 
-""" Section 3:  Main body of code
+""" Section 3:  Main body of code 
 #---------------------------------------------------------------------------"""
 # Create a 2D grid of x, y points using numpy meshgrid function
 
@@ -106,14 +107,33 @@ Vfunzies += electric_potential(q2, [x2,y2], X,Y)
 Vfunzies += electric_potential(q3, [x3,y3], X,Y)
 Vfunzies += electric_potential(q4, [x4,y4], X,Y)
 
+#Note I haven't added the electrical field component yet.
+#This is because I would like to review the position currently
 
+""" Section 4:  Plot your results as a contour plot (re-created from Tutorial, Dr. Massa)
+#---------------------------------------------------------------------------"""
+fig = plt.figure(figsize(20,10))
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
 
+ax1.set_title("X meshgrid", fontsize = 20) #Adds title to the X axis
+ax2.set_title("Y meshgrid", fontsize = 20) #Adds title to the Y axis
 
+im1 = ax1.imshow(Vfunzies, cmap = 'inferno', extent = (-5, 5, 5, 5), origin = "lower")
+im2 = ax2.imshow(Y, cmap='inferno')
+plt.colorbar(im2)
 
+# Contour plots set equipotential lines that are equally spaced in values of V
+# We can specify the values of the contour lines
 
+VpLines = 10 ** np.linspace(6,12,5)
+VpLines = sorted(list(-VpLines) + list(VpLines))
 
+ax1.contour(X,Y,Vfunzies, color='k', linewidths=4, levels=VpLines)
+#Notice that the Vplines within the contours is conencted to the line 129
+#To make adjustments change within 129
 
-
+#
 
 """ 
 PART B
