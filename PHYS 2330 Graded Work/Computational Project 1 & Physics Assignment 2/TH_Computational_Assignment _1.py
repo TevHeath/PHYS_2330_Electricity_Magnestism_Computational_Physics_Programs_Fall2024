@@ -112,7 +112,7 @@ ax1.set_ylabel("y (m)", fontsize=14)
 
 
 # Electric potential plot (using coolwarm colour scheme)
-im1 = ax1.imshow(V_potential, cmap='coolwarm', extent=(-6, 6, -5, 5), origin="lower")
+im1 = ax1.imshow(V_potential, cmap='coolwarm', extent=(-5, 5, -5, 5), origin="lower")
 plt.colorbar(im1, ax=ax1, label="Electric Potential (V)")
 
 # Contour plot for electric potential
@@ -142,6 +142,8 @@ ax3.set_ylabel("y (m)", fontsize=14)
 # Colorbar for the potential field
 plt.colorbar(filled_contour, ax=ax3, label="Electric Potential (V)")
 
+# # Adjust layout to avoid overlap
+plt.tight_layout()
 
 # Save the figure
 plt.savefig('fieldPlot8.png', dpi=300)
