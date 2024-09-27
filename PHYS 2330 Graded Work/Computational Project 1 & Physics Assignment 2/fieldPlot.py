@@ -147,7 +147,7 @@ plt.colorbar(filled_contour, ax=ax3, label="Electric Potential (V)")
 
 
 # Save the figure
-plt.savefig('fieldPlot.png', dpi=300)
+plt.savefig('fieldPlot2.png', dpi=300)
 
 
 
