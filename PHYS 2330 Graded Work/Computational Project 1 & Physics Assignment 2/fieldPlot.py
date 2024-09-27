@@ -104,31 +104,23 @@ Ey = EField_y1 + EField_y2 + EField_y3 + EField_y4
 #---------------------------------------------------------------------------"""
 fig = plt.figure(figsize=(20, 20))
 
-# Top left plot: Electric Potential
-ax1 = fig.add_subplot(221)  # 2 rows, 2 columns, position 1
+# Top: Electric Potential
+ax1 = fig.add_subplot(211)  # 2 rows, 2 columns, position 1
 ax1.set_title("Electric Potential", fontsize=20)
 ax1.set_xlabel("x (m)", fontsize=14)
 ax1.set_ylabel("y (m)", fontsize=14)
 
+
 # Electric potential plot (using coolwarm colour scheme)
 im1 = ax1.imshow(V_potential, cmap='coolwarm', extent=(-6, 6, -5, 5), origin="lower")
-plt.colorbar(im1, ax=ax1)
+plt.colorbar(im1, ax=ax1, label="Electric Potential (V)")
 
 # Contour plot for electric potential
 VpLines = 10 ** np.linspace(6, 12, 5)
 VpLines = sorted(list(-VpLines) + list(VpLines))
 ax1.contour(X, Y, V_potential, colors='red', linewidths=0.5, levels=VpLines)
 
-# Top right plot: Y Meshgrid
-ax2 = fig.add_subplot(222)  # 2 rows, 2 columns, position 2
-ax2.set_title("Y Meshgrid", fontsize=20)
-ax2.set_xlabel("x (m)", fontsize=14)
-ax2.set_ylabel("y (m)", fontsize=14)
 
-
-# Meshgrid plot (using coolwarm colour scheme)
-im2 = ax2.imshow(Y, cmap='coolwarm', extent=(-6, 6, -5, 5), origin="lower")
-plt.colorbar(im2, ax=ax2)
 
 # Bottom plot: Electric Field
 ax3 = fig.add_subplot(212)  # 2 rows, 1 column, position 3 (spans both columns)
