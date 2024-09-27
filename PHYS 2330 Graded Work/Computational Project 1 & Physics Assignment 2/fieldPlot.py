@@ -11,7 +11,7 @@
 #---------------------------------------------------------------------------"""
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.constants import epsilon_0
+from scipy.constants import epsilon_0 #Found this module from scipy research
 
 """ Section 2:  Define functions for the script
 #---------------------------------------------------------------------------"""
