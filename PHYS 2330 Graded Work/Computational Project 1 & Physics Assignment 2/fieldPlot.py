@@ -107,6 +107,8 @@ fig = plt.figure(figsize=(20, 20))
 # Top left plot: Electric Potential
 ax1 = fig.add_subplot(221)  # 2 rows, 2 columns, position 1
 ax1.set_title("Electric Potential", fontsize=20)
+ax1.set_xlabel("x (m)", fontsize=14)
+ax1.set_ylabel("y (m)", fontsize=14)
 
 # Electric potential plot (using coolwarm colour scheme)
 im1 = ax1.imshow(V_potential, cmap='coolwarm', extent=(-6, 6, -5, 5), origin="lower")
@@ -120,6 +122,9 @@ ax1.contour(X, Y, V_potential, colors='red', linewidths=0.5, levels=VpLines)
 # Top right plot: Y Meshgrid
 ax2 = fig.add_subplot(222)  # 2 rows, 2 columns, position 2
 ax2.set_title("Y Meshgrid", fontsize=20)
+ax2.set_xlabel("x (m)", fontsize=14)
+ax2.set_ylabel("y (m)", fontsize=14)
+
 
 # Meshgrid plot (using coolwarm colour scheme)
 im2 = ax2.imshow(Y, cmap='coolwarm', extent=(-6, 6, -5, 5), origin="lower")
@@ -147,7 +152,7 @@ plt.colorbar(filled_contour, ax=ax3, label="Electric Potential (V)")
 
 
 # Save the figure
-plt.savefig('fieldPlot4.png', dpi=300)
+plt.savefig('fieldPlot8.png', dpi=300)
 
 
 
