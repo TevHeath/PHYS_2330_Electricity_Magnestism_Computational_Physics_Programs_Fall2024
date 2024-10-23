@@ -29,18 +29,25 @@ With my solutions I strive to supply an example of my ability in the following a
 - 3D graphics
 - computational modelling
 
-The original questions can be found within the respository called the FYTT, these exercise are standard question that range from easy to advanced. Although depending one the question they might not require a computational solution.
+[//]: # (The original questions can be found within the respository called the FYTT, these exercise are standard question that range from easy to advanced. Although depending one the question they might not require a computational solution.)
 
 ## General Synopsis
 
 
-Each of these programs and code can be accessed in their own folder, with corresponding documentation as needed or required within the project or computational ask from the instrcutors.
+[//]: # (Each of these programs and code can be accessed in their own folder, with corresponding documentation as needed or required within the project or computational ask from the instrcutors.)
 
 
 
 ### Electricity & Magnetism Computational Project & Assignment #4: Due Date - October 25, 2024
 
-In this assignment, there are a couple important things to co
+In this assignment, there are a couple important things to for the graded part
+
+Part B:
+1.  Basically create the Simpson function and calculate the electric field at the points of length 10.0m and the total charge of +3.0C (notice that this was already created). Additionally, consider the distance of 5.0m above and from the midpoint line and secondly, a point along the axis of the line
+2. Use the code (i.e., trapezoid Method), **NOT THE SIMPSON's rule** to calculate the electric field of the uniform charged semicircle with radius 5.0 and a total charge +3.0C, by applying the centre-position and the 5.0 beyond the circle (Basically means 10cm from the centre point - personally, I think I will have to use the following r^2 = x^2 + y^2)
+3. Calculate the analytical solution for the electric field at the centre of the half-circular segment, this is similar to #2, but instead I will need to print the Trapezoid and Simpsons function results with a specific value for each N for a result within 0.01%.
+
+**Keep in mind there is a difference between calculating the electric field and providing the analytical solution. One for provides a numerical value, the other will only provide the electric field** 
 
 ### PHYS 2330: Resources
 This folder contains resources and datasets provided that I was able to find and utilize throughout the course
