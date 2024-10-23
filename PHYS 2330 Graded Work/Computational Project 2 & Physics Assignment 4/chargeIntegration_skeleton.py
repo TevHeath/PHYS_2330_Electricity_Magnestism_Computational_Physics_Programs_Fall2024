@@ -68,3 +68,31 @@ Ey = trapz(dEy,dL)
 
 print(Ex,Ey)
 
+# def simpson(f, a, b, n):  # Define a function 'simpson' that takes in:
+#     # f: the function to be integrated
+#     # a: the lower limit of integration
+#     # b: the upper limit of integration
+#     # n: the number of points to sample (should be odd for Simpson's Rule to work correctly)
+#
+#     h = (b - a) / (n - 1)  # Calculate the step size h between points
+#     # This step size is the distance between successive sample points
+#     # It is determined by dividing the interval [a, b] into (n-1) equal parts
+#
+#     xs = a + np.arange(n) * h  # Generate 'n' evenly spaced sample points from 'a' to 'b'
+#     # np.arange(n) creates an array of 'n' values: [0, 1, 2, ..., n-1]
+#     # Multiply by 'h' and add 'a' to get sample points in the range [a, b]
+#
+#     cs = 2 * np.ones(n)  # Create an array of coefficients, initialized to 2
+#     # This array will hold the Simpson's rule coefficients for each sample point
+#
+#     cs[1::2] = 4  # Set the coefficients for odd-indexed points to 4 (Simpson's rule alternates)
+#     cs[0] = 1     # Set the coefficient for the first point to 1
+#     cs[-1] = 1    # Set the coefficient for the last point to 1
+#     # Simpson's Rule uses 1 for the first and last points, 4 for odd points, and 2 for even points
+#
+#     contribs = cs * f(xs)  # Calculate the contribution of each point to the integral
+#     # f(xs) applies the function 'f' to each sample point
+#     # Multiply each result by the corresponding coefficient in 'cs'
+#
+#     return (h / 3) * np.sum(contribs)  # Apply Simpson's Rule formula to compute the integral
+#     # Multiply the sum of the weighted function values (contribs) by h/3 to get the final result
