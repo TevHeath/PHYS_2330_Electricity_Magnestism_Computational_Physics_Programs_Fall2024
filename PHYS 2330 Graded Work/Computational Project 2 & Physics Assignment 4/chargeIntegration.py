@@ -87,37 +87,37 @@ Ro_y = np.array([0, 5])  # Observation point for line segement
 Ro_cir = np.array([0, 0]) #Observation point for circle segement centre-point
 
 # Calculate for line segment (Trapzoid -> above the line [0,5])
-Nsegments_trap = 10
+Nsegments_trap = 100
 Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
 lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
 dEx_t_abv, dEy_t_abv = eField(lamb, Xt, Yt, * Ro_y)
 Ex_line_abv = trapz(dEx_t_abv, dL_t)
 Ey_line_abv = trapz(dEy_t_abv, dL_t)
 
-# Calculate for line segment (Trapzoid -> along the line [10,0])
-Nsegments_trap = 10
-Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
-lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
-dEx_t_acrs, dEy_t_acrs = eField(lamb, Xt, Yt, * Ro_x)
-Ex_line_acrs = trapz(dEx_t_acrs, dL_t)
-Ey_line_acrs = trapz(dEy_t_acrs, dL_t)
-
-
 # Calculate the line segment (Simpson -> above the line [0,5])
-Nsegments_simp = 6
+Nsegments_simp = 60
 Xs, Ys, dL_s = lineSegment(Ri, Rf, Nsegments_simp + 1)
 lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
 dEx_s_abv, dEy_s_abv = eField(lamb, Xs, Ys, * Ro_y)
 Ex_S_line_abv = simpson(dEx_s_abv,dL_s)
 Ey_S_line_abv = simpson(dEy_s_abv, dL_s)
 
+# Calculate for line segment (Trapzoid -> along the line [10,0])
+Nsegments_trap = 100
+Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
+lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
+dEx_t_acrs, dEy_t_acrs = eField(lamb, Xt, Yt, * Ro_x)
+Ex_line_acrs = trapz(dEx_t_acrs, dL_t)
+Ey_line_acrs = trapz(dEy_t_acrs, dL_t)
+
 # Calculate the line segment (Simpson -> along the line [10,0])
-Nsegments_simp = 6
+Nsegments_simp = 60
 Xs, Ys, dL_s = lineSegment(Ri, Rf, Nsegments_simp + 1)
 lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
 dEx_s_acrs, dEy_s_acrs = eField(lamb, Xs, Ys, * Ro_x)
 Ex_S_line_acrs = simpson(dEx_s_acrs,dL_s)
 Ey_S_line_acrs = simpson(dEy_s_acrs, dL_s)
+
 
 # Print electric field for line segment across the line [10,0]
 print(f"Line Segment Electric Field at Ro = {Ro_x}:")
