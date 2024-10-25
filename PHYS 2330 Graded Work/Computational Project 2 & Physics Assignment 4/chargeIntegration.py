@@ -131,29 +131,33 @@ print(f"Trapezoid Rule: Ex = {Ex_line_abv} N/C, Ey = {Ey_line_abv} N/C")
 print(f"Simpson's Rule: Ex = {Ex_S_line_abv} N/C, Ey = {Ey_S_line_abv} N/C")
 
 
-# int(f"Line Segment Electric Field Simpson at Ro = {Ro}:")
-# print(f"Ex = {Ex_S_line} N/C, Ey = {Ey_S_line} N/C")
 
-# # Semi-Circle Electric Field for Centre Point
-# radius = 5.0  # Radius of the semicircle
-# Ro_cir = np.array([0, 0]) #Observation point for circle segment centre-point
-# Ex_semi_centre, Ey_semi_centre = semiCircle(radius, Qtot, Nsegments, Ro_cir)
-#
-# #Semi-Circle Electric Field for Outside
-# Ex_semi_out, Ey_semi_out = semiCircle(radius, Qtot, Nsegments, Ro)
-#
-#
-#
-# # Print electric field for semi-circle at centre-point
-# print(f"Semi-Circle Electric Field at Ro_circle centre point = {Ro_cir}:")
-# print(f"Ex = {Ex_semi_centre} N/C, Ey = {Ey_semi_centre} N/C")
-#
-# # Print electric field for semi-circle at 5 meter from radius
-# print(f"Semi-Circle Electric Field at Ro_circle outside point = {Ro}:")
-# print(f"Ex = {Ex_semi_out} N/C, Ey = {Ey_semi_out} N/C")
 
 """PART B"""
+# Circle Electric Field
 
+Ro_cir_center = np.array([0, 0])  # Observation point for circle segment (center point)
+Ro_cir_acrs = np.array([10, 0])  # Observation point across from the circle
+
+# Semi-circle parameters
+radius = 5.0
+Nsegments_circ = 100  # Number of segments for the semicircle
+
+
+# Calculate for semi-circle (Trapzoid -> at the center point [0, 0])
+Ex_circ_center, Ey_circ_center = semiCircle(radius, Qtot, Nsegments_circ, Ro_cir_center)
+
+# Calculate for semi-circle (Trapzoid -> across the circle [10, 0])
+Ex_circ_acrs, Ey_circ_acrs = semiCircle(radius, Qtot, Nsegments_circ, Ro_cir_acrs)
+
+
+# Print electric field for semicircle at the center point [0, 0]
+print(f"Semi-Circle Electric Field at Ro = {Ro_cir}:")
+print(f"Ex = {Ex_circ_center} N/C, Ey = {Ey_circ_center} N/C")
+
+# Print electric field for semicircle across the circle at [10, 0]
+print(f"Semi-Circle Electric Field at Ro = {Ro_cir_acrs}:")
+print(f"Ex = {Ex_circ_acrs} N/C, Ey = {Ey_circ_acrs} N/C")
 
 
 
