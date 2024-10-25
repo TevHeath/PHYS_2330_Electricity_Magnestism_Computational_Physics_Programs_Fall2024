@@ -51,11 +51,15 @@ def simpson(f, dL):
     return area
 
 # Function to calculate the electric field for a semi-circle with non-uniform charge density
-def semiCircle(radius, Qtot, Nsegments, Ro_cir):
+def semiCircle_trap(radius, Qtot, Nsegments, Ro_cir):
     theta = np.linspace(-np.pi / 2, np.pi / 2, Nsegments)  # Angle from -π/2 to π/2
     dtheta = np.pi / Nsegments  # Angular width of each segment
     dL = radius * dtheta  # Length of each segment
-    lamb_0 = Qtot / ((2 / 3) * np.pi * radius)  # Adjusted constant charge density for cos^2(theta)
+
+    # Constant linear charge density for the uniform charge distribution
+    lamb = Qtot / (np.pi * radius)  # Total charge divided by the half-circle's length
+
+    #lamb_0 = Qtot / ((2 / 3) * np.pi * radius)  # Adjusted constant charge density for cos^2(theta)
 
     X = radius * np.cos(theta)  # x-coordinates
     Y = radius * np.sin(theta)  # y-coordinates
@@ -64,7 +68,7 @@ def semiCircle(radius, Qtot, Nsegments, Ro_cir):
 
     # Electric field contribution from each segment
     for i in range(Nsegments):
-        lamb = lamb_0 * np.cos(theta[i])**2  # Varying charge density λ(θ) = λ₀cos²(θ)
+        # lamb = lamb_0 * np.cos(theta[i])**2  # Varying charge density λ(θ) = λ₀cos²(θ)
         dq = lamb * dL  # Charge of each element
 
         r_charge = np.array([X[i], Y[i]])  # Position of charge element
@@ -78,6 +82,41 @@ def semiCircle(radius, Qtot, Nsegments, Ro_cir):
         Ey_total += dE[1]
 
     return Ex_total, Ey_total
+
+
+# Ensure that this version of semiCircle is defined and called in your script
+def semiCircle_simp(radius, Qtot, Nsegments, Ro_cir):
+    theta = np.linspace(-np.pi / 2, np.pi / 2, Nsegments)  # Angle from -π/2 to π/2
+    dtheta = np.pi / Nsegments  # Angular width of each segment
+    dL = radius * dtheta  # Length of each segment
+
+    # Constant linear charge density for the uniform charge distribution
+    lamb = Qtot / (np.pi * radius)  # Total charge divided by the half-circle's length
+
+    # lamb_0 = Qtot / ((2 / 3) * np.pi * radius)  # Adjusted constant charge density for cos^2(theta)
+
+    X = radius * np.cos(theta)  # x-coordinates
+    Y = radius * np.sin(theta)  # y-coordinates
+
+    dEx = np.zeros(Nsegments)
+    dEy = np.zeros(Nsegments)
+
+    # Electric field contribution from each segment
+    for i in range(Nsegments):
+        # lamb = lamb_0 * np.cos(theta[i])**2  # Varying charge density λ(θ) = λ₀cos²(θ)
+        dq = lamb * dL  # Charge of each element
+
+        r_charge = np.array([X[i], Y[i]])  # Position of charge element
+        r = Ro_cir - r_charge  # Distance vector from charge to observation point
+        r_mag = np.linalg.norm(r)
+
+        # Electric field contribution from dq
+        dE = (1 / (4 * np.pi * 8.854e-12)) * (dq / r_mag**2) * (r / r_mag)
+
+        dEx[i] = dE[0]
+        dEy[i] = dE[1]
+
+    return dEx, dEy, dL  # This ensures three outputs
 
 
 """ Section 3: Main body of code """
@@ -127,7 +166,7 @@ Ey_S_line_acrs = simpson(dEy_s_acrs, dL_s)
 print(f"PART A:")
 print(f"Line Segment Electric Field at Ro = {Ro_x}:")
 print(f"Trapezoid Rule: Ex = {Ex_line_acrs} N/C, Ey = {Ey_line_acrs} N/C")
-print(f"Simpson's Rule: Ex = {Ex_S_line_acrs} N/C, Ey = {Ey_S_line_acrs} N/C")
+print(f"Simpson's Rule: Ex = {Ex_S_line_acrs} N/C, Ey = {Ey_S_line_acrs} N/C\n")
 
 
 # Print electric field for line segment above the line [0,5]
@@ -146,14 +185,14 @@ Ro_cir_acrs = np.array([10, 0])  # Observation point across from the circle
 
 # Semi-circle parameters
 radius = 5.0
-Nsegments_circ = 100  # Number of segments for the semicircle
+Nsegments_circ = 500  # Number of segments for the semicircle
 
 
 # Calculate for semi-circle (Trapzoid -> at the center point [0, 0])
-Ex_circ_center, Ey_circ_center = semiCircle(radius, Qtot, Nsegments_circ, Ro_cir_center)
+Ex_circ_center, Ey_circ_center = semiCircle_trap(radius, Qtot, Nsegments_circ, Ro_cir_center)
 
 # Calculate for semi-circle (Trapzoid -> across the circle [10, 0])
-Ex_circ_acrs, Ey_circ_acrs = semiCircle(radius, Qtot, Nsegments_circ, Ro_cir_acrs)
+Ex_circ_acrs, Ey_circ_acrs = semiCircle_trap(radius, Qtot, Nsegments_circ, Ro_cir_acrs)
 
 
 # Print electric field for semicircle at the center point [0, 0]
@@ -165,45 +204,31 @@ print(f"Semi-Circle Electric Field at Ro = {Ro_cir_acrs}:")
 print(f"Ex = {Ex_circ_acrs} N/C, Ey = {Ey_circ_acrs} N/C \n")
 
 
-
-
-
-"""PART C"""
+# Semi-circle parameters
+""" PART C """
 print(f"PART C:")
+
 # Semi-circle parameters
 radius = 5.0
-Nsegments_circ_center = 100  # Number of segments for the semicircle
+Qtot = 3.0
+Ro_cir_center = np.array([0, 0])  # Observation point for circle segment (center point)
 
+# Calculate for semicircle using Trapezoid Rule at the center point [0, 0]
+Nsegments_circ_center_trap = 700000 # Number of segments for the semicircle using the trapezoid method
+Ex_circ_center_trap, Ey_circ_center_trap = semiCircle_trap(radius, Qtot, Nsegments_circ_center_trap, Ro_cir_center)
 
-# Calculate for semicircle (Trapzoid -> at the center point [0, 0])
-Nsegments_circ_center_trap = 50  # Number of segments for the semicircle
-Ex_circ_center_trap, Ey_circ_center_trap = semiCircle(radius, Qtot, Nsegments_circ_center_trap, Ro_cir_center)
-
-# Print electric field for semicircle at the center point [0, 0]
-print(f"Semi-Circle Electric Field using Trapzoid at Ro = {Ro_cir}:")
+# Print electric field for semicircle at the center point [0, 0] using Trapezoid Rule
+print(f"Semi-Circle Electric Field using Trapezoid at Ro = {Ro_cir_center}:")
 print(f"Ex = {Ex_circ_center_trap} N/C, Ey = {Ey_circ_center_trap} N/C")
 
-# # Calculate for semicircle (Simpson -> at the center point [0, 0])
-# Nsegments_circ_center_simp = 100
-# Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
-# lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
-# dEx_t_acrs, dEy_t_acrs = eField(lamb, Xt, Yt, * Ro_x)
-# Ex_circ_center_simp = trapz(dEx_t_acrs, dL_t)
-# Ey_circ_center_simp = trapz(dEy_t_acrs, dL_t)
+# Calculate electric field components for the semicircle using Simpson's Rule
+Nsegments_circ_center_simp = 700001 # Must be odd for Simpson's Rule
+dEx_circ_center, dEy_circ_center, dL_s = semiCircle_simp(radius, Qtot, Nsegments_circ_center_simp, Ro_cir_center)
+Ex_circ_center_simp = simpson(dEx_circ_center, dL_s)
+Ey_circ_center_simp = simpson(dEy_circ_center, dL_s)
 
-#
-#
-# # Calculate for semi-circle (Trapzoid -> at the center point [0, 0])
-# Nsegments_simp = 100
-# Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
-# lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
-# dEx_t_acrs, dEy_t_acrs = eField(lamb, Xt, Yt, * Ro_x)
-# Ex_circ_center = trapz(dEx_t_acrs, dL_t)
-# Ey_circ_center = trapz(dEy_t_acrs, dL_t)
-#
-#
-# # Calculate for semi-circle (Trapzoid -> across the circle [10, 0])
-# Ex_circ_acrs, Ey_circ_acrs = semiCircle(radius, Qtot, Nsegments_circ_acrs, Ro_cir_acrs)
-# Nsegments_circ_acrs = 100  # Number of segments for the semicircle
-#
-#
+# Print electric field for the semicircle at the center point [0, 0] using Simpson's Rule
+print(f"Semi-Circle Electric Field using Simpson at Ro = {Ro_cir_center}:")
+print(f"Ex = {Ex_circ_center_simp} N/C, Ey = {Ey_circ_center_simp} N/C")
+
+
