@@ -1,147 +1,160 @@
-# Computational Exercise 3 for PHYS*2330 - Fall 2023
-# chargeIntegration.py - scaffold code
-# MVM
-# ------------------------------------------------------------------------------
 
-
-""" Section 1:  Start by importing relevant libraries
-#---------------------------------------------------------------------------"""
+""" Section 1: Start by importing relevant libraries """
 import numpy as np
 
-""" Section 2:  Define functions for the script
-#---------------------------------------------------------------------------"""
-
+""" Section 2: Define functions for the script """
 
 # This produces arrays of (x,y) positions for a line
 # segment, from position ri to rf, divided into N equally spaced intervals
-def lineSegment(ri, rf, n):
-    # ri: Initial point of the line segment (as a tuple/list of x and y coordinates).
-    # rf: Final point of the line segment (as a tuple/list of x and y coordinates).
-    # n: Number of points to divide the line segment into.
-
-    x = np.linspace(ri[0], rf[0], n)
-    # Creates an array of n equally spaced points along the x-axis between the initial x-coordinate (ri[0]) and the final x-coordinate (rf[0]).
-
-    y = np.linspace(ri[1], rf[1], n)
-    # Creates an array of n equally spaced points along the y-axis between the initial y-coordinate (ri[1]) and the final y-coordinate (rf[1]).
-
+def lineSegment(ri, rf, N):
+    x = np.linspace(ri[0], rf[0], N)
+    y = np.linspace(ri[1], rf[1], N)
     dL = np.sqrt((x[1] - x[0]) ** 2 + (y[1] - y[0]) ** 2)
-    # Calculates the distance between two consecutive points along the line segment using the Euclidean distance formula.
-    # This represents the length of each segment between points.
-
     return x, y, dL
-    # Returns the arrays of x and y coordinates, and the length of each small segment along the line.
 
-
-# Return the electric field, E, due to a charge "q" located at position (xq,yq).
-# Evaluate V at the given position (x,y).
-# This can be taken and modified from exercise 1.
+# Return the electric field, E, due to a charge "q" located at position (xq, yq).
 def eField(q, xq, yq, x, y):
-    # q: Charge of the point source.
-    # xq, yq: Coordinates of the charge (location of the source charge).
-    # x, y: Coordinates of the observation point (where we want to calculate the electric field).
-
-    k = 9.0e9
-    # k is the Coulomb constant, approximately 9.0 × 10^9 N·m²/C² (in SI units).
-
+    k = 9.0e9  # Coulomb constant
     denom = ((x - xq) ** 2 + (y - yq) ** 2) ** 1.5
-    # denom represents the denominator of the electric field formula.
-    # It calculates the distance between the source charge and the observation point raised to the power of 3/2.
-    # (x - xq)² + (y - yq)² is the squared distance between the two points.
-
     dEx = k * q * (x - xq) / denom
-    # dEx is the x-component of the electric field at point (x, y).
-    # It is calculated using Coulomb's law, where the field decreases with the square of the distance and depends on the difference in x-coordinates.
-
     dEy = k * q * (y - yq) / denom
-    # dEy is the y-component of the electric field at point (x, y).
-    # It is calculated similarly, but for the y-component, using the difference in y-coordinates.
-
     return dEx, dEy
-    # Returns the electric field components in the x-direction (dEx) and y-direction (dEy).
 
-
-# Create a function that will integrate, using Trapezoid Rule
-# Inputs should be A function f, and a segment length dL (associated with dQ)
+# Create a function that will integrate using Trapezoid Rule
 def trapz(f, dL):
     area = 0.0
-
     for i in range(f.size - 1):  # 1
         # area += dL * (f[i]+ f[i+1])/2 #2
         area = dL * np.sum(f[1:] + f[:-1]) / 2  # 3
+    return area
 
-        """ 
-        #1 - We need to take one less for the trapzoid hence range(f.size - 1), this makes the area for each trapzoid, this might need to be considered for simpson's rule
-        #2 - We added the += because we want to add the area as we go hence the area+= dl...
-        #3 - Here we are using slicing, 1: means start from index 1 to the end, and :-1 mean everything except the last one
-        #4 - The output we want to know is the y value not necessarily the x value since it will be about 0 anyways only be interested in the y value
-        """
+# Create a function that will integrate using Simpson's Rule
+def simpson(f, dL):
+    """
+    Simpson's rule approximates the integral of a function by fitting parabolas through groups of three points.
+    It requires an even number of intervals (odd number of points).
+    """
+    if f.size % 2 == 0:
+        raise ValueError("Simpson's rule requires an odd number of points.")
 
-    return area  # 4
+    n = f.size - 1  # Number of intervals
+    area = f[0] + f[-1]  # Initialize with first and last terms of f(x)
+
+    # Apply Simpson's rule coefficients:
+    # 4 for odd-indexed terms, 2 for even-indexed terms
+    area += 4 * np.sum(f[1:n:2])  # Sum of odd-indexed terms
+    area += 2 * np.sum(f[2:n - 1:2])  # Sum of even-indexed terms
+
+    # Multiply by the interval size divided by 3 (Simpson's factor)
+    area *= dL / 3
+
+    return area
+
+# Function to calculate the electric field for a semi-circle
+def semiCircle(radius, Qtot, Nsegments, Ro_cir):
+    theta = np.linspace(-np.pi / 2, np.pi / 2, Nsegments)  # Angle from -π/2 to π/2
+    dtheta = np.pi / Nsegments  # Angular width of each segment
+    dL = radius * dtheta  # Length of each segment
+    lamb = Qtot / (np.pi * radius)  # Linear charge density
+
+    X = radius * np.cos(theta)  # x-coordinates
+    Y = radius * np.sin(theta)  # y-coordinates
+
+    Ex_total, Ey_total = 0.0, 0.0
+
+    # Electric field contribution from each segment
+    for i in range(Nsegments):
+        r_charge = np.array([X[i], Y[i]])  # Position of charge element
+        r = Ro_cir - r_charge  # Distance vector from charge to observation point
+        r_mag = np.linalg.norm(r)
+
+        dq = lamb * dL  # Charge of each element
+        dE = (1 / (4 * np.pi * 8.854e-12)) * (dq / r_mag**2) * (r / r_mag)
+
+        Ex_total += dE[0]
+        Ey_total += dE[1]
+
+    return Ex_total, Ey_total
+
+""" Section 3: Main body of code """
+"""PART A"""
+# Line Segment Electric Field
+Ri = np.array([-5, 0])  # Start of the line segment
+Rf = np.array([5, 0])  # End of the line segment
+Qtot = 3.0  # Total charge
+Ro_x = np.array([10, 0])  # Observation point for line segement
+Ro_y = np.array([0, 5])  # Observation point for line segement
+Ro_cir = np.array([0, 0]) #Observation point for circle segement centre-point
+
+# Calculate for line segment (Trapzoid -> above the line [0,5])
+Nsegments_trap = 10
+Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
+lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
+dEx_t_abv, dEy_t_abv = eField(lamb, Xt, Yt, * Ro_y)
+Ex_line_abv = trapz(dEx_t_abv, dL_t)
+Ey_line_abv = trapz(dEy_t_abv, dL_t)
+
+# Calculate for line segment (Trapzoid -> along the line [10,0])
+Nsegments_trap = 10
+Xt, Yt, dL_t = lineSegment(Ri, Rf, Nsegments_trap + 1)
+lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
+dEx_t_acrs, dEy_t_acrs = eField(lamb, Xt, Yt, * Ro_x)
+Ex_line_acrs = trapz(dEx_t_acrs, dL_t)
+Ey_line_acrs = trapz(dEy_t_acrs, dL_t)
 
 
-""" Section 3:  Main body of code
-#---------------------------------------------------------------------------"""
-# Define characteristics of the uniformly charged line segment
-Ri = np.array([-5, 0])  # 10 meters long so -5m
-Rf = np.array([5, 0])  # 10 meters long so 5m
-Nsegments = 100
-Qtot = 3.0
-Length = np.sqrt(np.sum((Rf - Ri) ** 2))
-# dL =
+# Calculate the line segment (Simpson -> above the line [0,5])
+Nsegments_simp = 6
+Xs, Ys, dL_s = lineSegment(Ri, Rf, Nsegments_simp + 1)
+lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
+dEx_s_abv, dEy_s_abv = eField(lamb, Xs, Ys, * Ro_y)
+Ex_S_line_abv = simpson(dEx_s_abv,dL_s)
+Ey_S_line_abv = simpson(dEy_s_abv, dL_s)
+
+# Calculate the line segment (Simpson -> along the line [10,0])
+Nsegments_simp = 6
+Xs, Ys, dL_s = lineSegment(Ri, Rf, Nsegments_simp + 1)
+lamb = Qtot / np.sqrt(np.sum((Rf - Ri) ** 2))  # Linear charge density
+dEx_s_acrs, dEy_s_acrs = eField(lamb, Xs, Ys, * Ro_x)
+Ex_S_line_acrs = simpson(dEx_s_acrs,dL_s)
+Ey_S_line_acrs = simpson(dEy_s_acrs, dL_s)
+
+# Print electric field for line segment across the line [10,0]
+print(f"Line Segment Electric Field at Ro = {Ro_x}:")
+print(f"Trapezoid Rule: Ex = {Ex_line_acrs} N/C, Ey = {Ey_line_acrs} N/C")
+print(f"Simpson's Rule: Ex = {Ex_S_line_acrs} N/C, Ey = {Ey_S_line_acrs} N/C")
 
 
-# linear charge density (charge per unit length)
-lamb = Qtot / Length
-
-# position at which electric field is calculated
-# Ro = np.array([0,5]) #Changed only use y-values
-Ro = np.array([10, 0])  # Changed only use x-values
-
-# compute dEx, dEy at position Ro due to each segment along the
-# charged line segment.
-# NOTE:  the *Ro - assigns Ro values to appropriate variables, in order of how
-#        they are defined in function
+# Print electric field for line segment above the line [0,5]
+print(f"Line Segment Electric Field at Ro = {Ro_y}:")
+print(f"Trapezoid Rule: Ex = {Ex_line_abv} N/C, Ey = {Ey_line_abv} N/C")
+print(f"Simpson's Rule: Ex = {Ex_S_line_abv} N/C, Ey = {Ey_S_line_abv} N/C")
 
 
-X, Y, dL = lineSegment(Ri, Rf, Nsegments + 1)  # We need to add the +1 to ensure that we use 101 instead of 100
+# int(f"Line Segment Electric Field Simpson at Ro = {Ro}:")
+# print(f"Ex = {Ex_S_line} N/C, Ey = {Ey_S_line} N/C")
 
-"""
-Consider making it from polar to cartesian to same time
-"""
+# # Semi-Circle Electric Field for Centre Point
+# radius = 5.0  # Radius of the semicircle
+# Ro_cir = np.array([0, 0]) #Observation point for circle segment centre-point
+# Ex_semi_centre, Ey_semi_centre = semiCircle(radius, Qtot, Nsegments, Ro_cir)
+#
+# #Semi-Circle Electric Field for Outside
+# Ex_semi_out, Ey_semi_out = semiCircle(radius, Qtot, Nsegments, Ro)
+#
+#
+#
+# # Print electric field for semi-circle at centre-point
+# print(f"Semi-Circle Electric Field at Ro_circle centre point = {Ro_cir}:")
+# print(f"Ex = {Ex_semi_centre} N/C, Ey = {Ey_semi_centre} N/C")
+#
+# # Print electric field for semi-circle at 5 meter from radius
+# print(f"Semi-Circle Electric Field at Ro_circle outside point = {Ro}:")
+# print(f"Ex = {Ex_semi_out} N/C, Ey = {Ey_semi_out} N/C")
 
-# Notice that we input 'lamb' instead of dQ here?
-dEx, dEy = eField(lamb, X, Y, *Ro)
+"""PART B"""
 
-# Apply trapz function to integrate all contributions dEx, dEy to computer the
-# total electric field at position Ro
-Ex = trapz(dEx, dL)
-Ey = trapz(dEy, dL)
 
-print(Ex, Ey)
 
-def simpson(f, a , b, n):
-    h = (b - a) / (n - 1) #Calculates the step size h between points
-    xs = a + np.arrange(n) * h
-    cs = 2 * np.ones(n)
-    cs[1::2] = 4 # Set the coefficients for odd-indexed points to 4 (Simpson's rule alternates)
-    cs[0] = 1 # Set the coefficient for the first point to 1
 
-    cs[-1] = 1  # Set the coefficient for the last point to 1
-    contribs = cs * f(xs)
-
-    return (h / 3) * np.sum(contribs)
-
-    # f: the function to be integrated
-    # a: the lower limit of integration
-    # b: the upper limit of integration
-    # n: the number of points to sample (The number must be odd for the Simpson's Rule)
-    # h: the step size for the distance between successive sample points
-        #From research the step size comes from dividing the internal [a, b] into (n-1) equal parts
-
-    # xs: Generates 'n' evenly spaced sample points from 'a' to 'b'
-        # np.arrange(n) creates an array of 'n' values: [0, 1, 2, ..., n-1]
-        # we multiply by 'h' and add 'a' to get the sample points in the range [a, b]
-
-    # cs: creates an array of coefficient, initialized to 2
-        #This array holds the Simpson's rule coefficient for each sample point
+"""PART C"""
